@@ -4,7 +4,7 @@ class MetricsUpdateJob < ApplicationJob
   queue_as :default
 
   def perform(path, db_runtime)
-    @logger ||= Logger.new(File.join(Rails.root, "logs", "metrics_update_job_errors.log"))
+    @logger ||= Logger.new(File.join(Rails.root, 'logs', 'metrics_update_job_errors.log'))
     route = Rails.sensible_routes.match_for path
     normalized_path = "#{route.verb} #{route.path}"
     Rails.logger.info "#{normalized_path} #{db_runtime}"
