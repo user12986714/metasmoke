@@ -1,6 +1,21 @@
 version: 2
 jobs:
-  build:
+  js:
+    working_directory: ~/Charcoal-SE/metasmoke
+    parallelism: 1
+    shell: /bin/bash --login
+
+    docker:
+    - image: circleci/ruby:2.5-node
+
+    steps:
+    - run: if [ -z "${NODE_ENV:-}" ]; then export NODE_ENV=test; fi
+    - run: export PATH="~/Charcoal-SE/metasmoke/node_modules/.bin:$PATH"
+    - run: npm install
+    - run: echo -e "export RAILS_ENV=test\nexport RACK_ENV=test" >> $BASH_ENV
+    - run: npm test
+
+  ruby:
     working_directory: ~/Charcoal-SE/metasmoke
     parallelism: 1
     shell: /bin/bash --login
@@ -75,3 +90,10 @@ jobs:
         path: coverage
     - store_artifacts:
         path: /tmp/circleci-test-results
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - js
+      - ruby
