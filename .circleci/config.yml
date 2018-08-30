@@ -64,8 +64,9 @@ jobs:
         environment:
           RAILS_ENV: test
           RACK_ENV: test
-    - run: mv logs /tmp/circleci-artifacts
 
+    - store_artifacts:
+        path: logs
     - store_test_results:
         path: /tmp/circleci-test-results
     - store_artifacts:
