@@ -123,20 +123,6 @@ jobs:
         paths:
         - ./node_modules
 
-    # Assets
-    - restore_cache:
-        keys:
-        - v1-dep-assets-{{ .Branch }}-
-        - v1-dep-assets-master
-        - v1-dep-assets-
-    # Supposedly this speeds up tests
-    - run: bundle exec rake assets:precompile
-    - save_cache:
-        key: v1-dep-assets-{{ .Branch }}-{{ epoch }}
-        paths:
-        - ./public/assets
-        - ./tmp/cache/assets/sprockets
-
     # Run tests
     - run:
         command: bundle exec rake db:create db:schema:load db:test:prepare db:migrate --trace
