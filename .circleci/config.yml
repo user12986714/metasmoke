@@ -63,7 +63,7 @@ jobs:
         - ~/.bundle
     - run: bundle exec rubocop -D
 
-  ruby:
+  rails-tests:
     working_directory: ~/Charcoal-SE/metasmoke
     parallelism: 1
     shell: /bin/bash --login
@@ -116,7 +116,6 @@ jobs:
           RACK_ENV: test
     - run: bundle exec rake test:prepare
     - run: bundle exec rake db:migrate
-    - run: bundle exec rubocop -D
     - run:
         command: bundle exec rails test --verbose
         environment:
@@ -139,5 +138,5 @@ workflows:
   build_and_test:
     jobs:
       - js
-      - ruby
+      - rails-tests
       - rubocop
