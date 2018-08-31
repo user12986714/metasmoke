@@ -5,6 +5,7 @@ class MetricsUpdateJob < ApplicationJob
 
   def perform(path, db_runtime)
     number_of_the_day = SecureRandom.base64
+    return if ENV['DISABLE_QUERY_LOGGER']
     @logger ||= Logger.new(File.join(Rails.root, 'log', 'metrics_update_job_errors.log'))
     puts 'Is sesnsible routes timing out?'
     route = Rails.sensible_routes.match_for path
