@@ -88,6 +88,14 @@ jobs:
     - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
     - run: cp config/config.sample.yml config/config.yml
     - run: echo -e "export RAILS_ENV=test\nexport RACK_ENV=test" >> $BASH_ENV
+    - run: |-
+        mkdir -p config && echo 'test:
+          adapter: mysql2
+          database: metasmoke_test
+          username: root
+          password: ubuntu
+          host: 127.0.0.1
+        ' > config/database.yml
 
     # Bundler
     - restore_cache:
@@ -130,14 +138,6 @@ jobs:
         - ./tmp/cache/assets/sprockets
 
     # Run tests
-    - run: |-
-        mkdir -p config && echo 'test:
-          adapter: mysql2
-          database: metasmoke_test
-          username: root
-          password: ubuntu
-          host: 127.0.0.1
-        ' > config/database.yml
     - run:
         command: bundle exec rake db:create db:schema:load --trace
         environment:
