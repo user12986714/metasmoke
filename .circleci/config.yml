@@ -107,7 +107,7 @@ jobs:
           database: metasmoke_test
           username: root
           password: ubuntu
-          pool: 20
+          pool: 100
           timeout: 5000
           host: 127.0.0.1
         ' > config/database.yml
