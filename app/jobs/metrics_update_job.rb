@@ -5,7 +5,9 @@ class MetricsUpdateJob < ApplicationJob
 
   def perform(path, db_runtime)
     @logger ||= Logger.new(File.join(Rails.root, 'log', 'metrics_update_job_errors.log'))
+    puts "Is sesnsible routes timing out?"
     route = Rails.sensible_routes.match_for path
+    puts "Maybe!"
     return if route.nil?
     normalized_path = "#{route.verb} #{route.path}"
     Rails.logger.info "#{normalized_path} #{db_runtime}"
