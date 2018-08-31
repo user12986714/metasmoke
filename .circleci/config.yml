@@ -122,7 +122,7 @@ jobs:
         - v1-dep-assets-master
         - v1-dep-assets-
     # Supposedly this speeds up tests
-    - run: rails assets:precompile
+    - run: bundle exec rake assets:precompile
     - save_cache:
         key: v1-dep-assets-{{ .Branch }}-{{ epoch }}
         paths:
