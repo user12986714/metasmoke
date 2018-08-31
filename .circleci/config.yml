@@ -140,3 +140,4 @@ workflows:
     jobs:
       - js
       - ruby
+      - rubocop
