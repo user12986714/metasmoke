@@ -19,7 +19,10 @@ class MetricsUpdateJob < ApplicationJob
     Rails.logger.info "BEFORE: #{query.counter} #{query.average}"
     query.average = (query.average * query.counter + db_runtime) / (query.counter += 1)
     puts "#{number_of_the_day} Checkpoint 4"
-    query.save
+    # https://stackoverflow.com/questions/24270994/sudden-inexplicable-active-record-connection-timeouts-while-testing-with-rspec
+    ActiveRecord::Base.connection_pool.with_connection do |conn|
+      query.save
+    end
     puts "#{number_of_the_day} Checkpoint 5"
     Rails.logger.info "AFTER: #{query.counter} #{query.average}"
     puts 'Exited! (no error)'
