@@ -15,6 +15,8 @@ class MetricsUpdateJob < ApplicationJob
     query.save
     Rails.logger.info "AFTER: #{query.counter} #{query.average}"
   rescue => e
+    puts e.message
+    puts e.backtrace
     @logger.error e.message
     e.backtrace.each { |line| @logger.error line }
   end
