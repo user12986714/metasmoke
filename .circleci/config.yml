@@ -139,12 +139,10 @@ jobs:
 
     # Run tests
     - run:
-        command: bundle exec rake db:create db:schema:load --trace
+        command: bundle exec rake db:create db:schema:load db:test:prepare db:migrate --trace
         environment:
           RAILS_ENV: test
           RACK_ENV: test
-    - run: bundle exec rake test:prepare
-    - run: bundle exec rake db:migrate
     - run:
         command: bundle exec rails test --verbose
         environment:
