@@ -20,7 +20,7 @@ class MetricsUpdateJob < ApplicationJob
     query.average = (query.average * query.counter + db_runtime) / (query.counter += 1)
     puts "#{number_of_the_day} Checkpoint 4"
     # https://stackoverflow.com/questions/24270994/sudden-inexplicable-active-record-connection-timeouts-while-testing-with-rspec
-    ActiveRecord::Base.connection_pool.with_connection do |conn|
+    ActiveRecord::Base.connection_pool.with_connection do |_conn|
       query.save
     end
     puts "#{number_of_the_day} Checkpoint 5"
