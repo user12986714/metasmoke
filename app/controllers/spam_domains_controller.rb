@@ -14,7 +14,6 @@ class SpamDomainsController < ApplicationController
                else
                  SpamDomain.all
                end.includes(:domain_tags).order(domain: :asc).paginate(page: params[:page], per_page: 100)
-    SpamDomain.preload_post_counts(@domains)
   end
 
   def fix_asn_tags
@@ -34,8 +33,6 @@ class SpamDomainsController < ApplicationController
   end
 
   def show
-    @counts = { all: SpamDomain.where(id: params[:id]).joins(:posts).count,
-                tp: SpamDomain.where(id: params[:id]).joins(:posts).where(posts: { is_tp: true }).count }
     @posts = @domain.posts.order(created_at: :desc).includes_for_post_row.paginate(page: params[:page], per_page: 100)
     @sites = Site.where(id: @posts.map(&:site_id))
   end
