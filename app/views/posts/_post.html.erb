@@ -5,7 +5,6 @@
 <% deletion_date = false if deletion_date.nil? %>
 <% show_autoflagged = false if show_autoflagged.nil? %>
 <% show_autoflaggers = show_autoflagged if show_autoflaggers.nil? %>
-<% @sites = [post.site] if @sites.nil? %>
 
 <% if wrap_in_tr %>
 <tr class="post-cell post-cell-<%= post.id %>">
