@@ -21,10 +21,9 @@
       <tr>
         <td><code><%= d.domain %></code></td>
         <td>
-          <%= d.post_counts[:all] || 0 %>
-          (<span class="text-success" title="TP" data-toggle="tooltip"><%= d.post_counts[:tp] || 0 %></span>,
-          <span class="text-danger" title="FP" data-toggle="tooltip"><%= d.post_counts[:fp] || 0 %></span>,
-          <span class="text-warning" title="NAA" data-toggle="tooltip"><%= d.post_counts[:naa] || 0 %></span>)
+          (<span class="text-success" title="TP" data-toggle="tooltip"><%= d.tp_count %></span>,
+          <span class="text-danger" title="FP" data-toggle="tooltip"><%= d.fp_count %></span>,
+          <span class="text-warning" title="NAA" data-toggle="tooltip"><%= d.naa_count %></span>)
         </td>
         <td>
           <% d.domain_tags.each do |tag| %>
